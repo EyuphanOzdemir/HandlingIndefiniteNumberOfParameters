@@ -1,5 +1,6 @@
 
 HOW TO HANDLE ENTITIES WITH INDEFINITE NUMBER OF PARAMETERS IN ASP. NET CORE MVC?
+
 This repository includes a solution to the problem of creating insert/edit views for the entities that have indefinite number of parameters. Imagine that we have two entities called Lamp and Armature which have common fields, their own special fields but also an open-ended parameter list. So we need dynamically-created views reading parameter lists and puts the corresponding input fields. Parameters might be of any type (string, integer, date-time, select lists, ...) and may be mandatory, have a maximum length, etc.
 
 To summarize the solution, BaseEntity Class is used for common tasks. (This class is Abstract because it has an abstract method called UpdateParameterValuesInDB).The most important task is to fetch the parameters and fill them with required select lists. This class is inherited by Lamp and Armature classes. The virtual method called GetParameters of BaseEntity class reads the common fields. Lamp and Armature classes calls this method first and then go on reading their own specific parameters.
