@@ -1,0 +1,49 @@
+﻿@*
+    All parameter stuff is in the responsibility of BaseClass
+*@
+
+@model Models.BaseEntity
+@using System.Data
+<h5>PARAMETERS</h5>
+@*Loop in the parameters*@
+@for (int i = 0; i <= Model.Parameters.Count - 1; i++)
+{
+<div class="form-group">
+    @*
+        we need these hidden fields because we need to access
+        their db types, labels, etc. in the controller
+    *@
+
+    @Html.HiddenFor(param => Model.Parameters[i].id)
+    @Html.HiddenFor(param => Model.Parameters[i].dbType)
+    @Html.HiddenFor(param => Model.Parameters[i].label)
+    @Html.HiddenFor(param => Model.Parameters[i].required)
+    @Html.HiddenFor(param => Model.Parameters[i].isLongText)
+    @Html.HiddenFor(param => Model.Parameters[i].selectListCSV)
+
+
+    @*
+        We should use Model.parameters[i].X format for each field to access all the parameters of BaseEntity object.
+    *@
+
+
+    <label class="control-label col-md-2">@Model.Parameters[i].explanation</label>
+
+    <div class="col-md-10">
+        @if (Model.Parameters[i].dbType == DbType.Boolean)
+            @Html.CheckBoxFor(modelItem => Model.Parameters[i].boolValue, new { @class = "form-control" })
+            else if (Model.Parameters[i].dbType == DbType.DateTime)
+                //if the data type is DateTime, we need to add date-picker class to use JQuery-UI function "datepicker()"
+                //See Jquery code in the PageScripts section of Edit.cshtml.
+                @Html.TextBoxFor(modelItem => Model.Parameters[i].value, new { @class = "form-control date-picker" })
+                else if (Model.Parameters[i].selectList != null)
+                    //if the selectList value is not null, create a dropdownlist
+                    @Html.DropDownListFor(modelItem => Model.Parameters[i].value, Model.Parameters[i].selectList, new { @class = "form-control" })
+                    else if (Model.Parameters[i].isLongText)
+                        //if the value is long text create a text area
+                        @Html.TextAreaFor(modelItem => Model.Parameters[i].value, new { @class = "form-control" })
+                        else
+                            @Html.TextBoxFor(modelItem => Model.Parameters[i].value, new { @class = "form-control" })
+    </div>
+</div>
+}

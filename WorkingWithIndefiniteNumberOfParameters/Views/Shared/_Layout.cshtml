@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+    <!--Standard, general CSS-->
+    <link href="~/Site.css" rel="stylesheet" />
+    <!--for bootstrap-->
+    <link href="~/bootstrap.css" rel="stylesheet" />
+
+    <!--JQueryUI CSS-->
+    <link href="~/Scripts/jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet" />
+    <!--JQuery library-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    <!--JQueryUI library-->
+    <script src="~/Scripts/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <!--Render the specific JavaScript code of the page-->
+    @RenderSection("PageScripts", false)
+</head>
+<body>
+    <div class="container body-content">
+        <h4> <font color="red">@ViewBag.Message</font></h4>
+        @RenderBody()
+
+    </div>
+</body>
+</html>
