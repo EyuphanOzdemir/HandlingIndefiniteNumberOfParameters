@@ -31,16 +31,12 @@ namespace Models
         public int length { get; set; }
 
         //if the type is boolean, we need to use checkbox in our partial view (_ParametersView), and 
-        //in the following code we cant use "value" which is an object.
-        //@Html.CheckBoxFor(modelItem => Model.parameters[i].boolValue, new { @class = "form-control" })
-        //This is because value of the parameter in this class is an object and objects cannot be implicitly converted to bool.
         public bool boolValue
         {
             get; set;
         }
 
         //we need this field to get all the information we need to show to the user
-
         public string explanation
         {
             get
